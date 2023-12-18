@@ -1,42 +1,42 @@
 package Model.BoardGame;
 
 public class Position {
-    private Integer linha;
-    private Integer coluna;
+    private Integer rows;
+    private Integer columns;
 
-    public Position(Integer linha, Integer coluna) {
-        this.linha = linha;
-        this.coluna = coluna;
+    public Position(Integer rows, Integer columns) {
+        this.rows = rows;
+        this.columns = columns;
     }
 
-    public void setValues(Integer linha, Integer coluna) {
-        /*if (linha < 0 || coluna < 0) {
+    public void setValues(Integer rows, Integer columns) {
+        /*if (rows < 0 || columns < 0) {
             throw new DomainException();
         }
          */
-        this.linha = linha;
-        this.coluna = coluna;
+        this.rows = rows;
+        this.columns = columns;
     }
 
     // Métodos Get E Set \\
-    public Integer getLinha() {
-        return linha;
+    public Integer getrows() {
+        return rows;
     }
 
-    public void setLinha(Integer linha) {
-        this.linha = linha;
+    public void setrows(Integer rows) {
+        this.rows = rows;
     }
 
-    public Integer getColuna() {
-        return coluna;
+    public Integer getcolumns() {
+        return columns;
     }
 
-    public void setColuna(Integer coluna) {
-        this.coluna = coluna;
+    public void setcolumns(Integer columns) {
+        this.columns = columns;
     }
 
     @Override
     public String toString() {
-        return linha + ", " + coluna;
+        return rows + ", " + columns;
     }
 }
