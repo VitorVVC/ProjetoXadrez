@@ -19,19 +19,19 @@ public class Position {
     }
 
     // Métodos Get E Set \\
-    public Integer getrows() {
+    public Integer getRows() {
         return rows;
     }
 
-    public void setrows(Integer rows) {
+    public void setRows(Integer rows) {
         this.rows = rows;
     }
 
-    public Integer getcolumns() {
+    public Integer getColumns() {
         return columns;
     }
 
-    public void setcolumns(Integer columns) {
+    public void setColumns(Integer columns) {
         this.columns = columns;
     }
 

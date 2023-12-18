@@ -12,9 +12,15 @@ public class Board {
         this.pieces = new Piece[rows][columns];
     }
 
+    public Piece piece(Integer rows, Integer columns) {
+        return pieces[rows][columns];
+    }
+
+    public Piece piece(Position position) {
+        return pieces[position.getRows()][position.getColumns()];
+    }
+
     // Métodos Get e Set
-
-
     public Integer getRows() {
         return rows;
     }
