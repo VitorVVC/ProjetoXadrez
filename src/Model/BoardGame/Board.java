@@ -22,7 +22,7 @@ public class Board {
 
     public void placePiece(Piece piece, Position position){
         pieces[position.getRows()][position.getColumns()] = piece;
-        
+        piece.position = position;
     }
 
     // Métodos Get e Set

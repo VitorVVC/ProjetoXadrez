@@ -1,6 +1,5 @@
 package Model.Application;
 
-import Model.BoardGame.Board;
 import Model.Chess.ChessMatch;
 
 public class Main {
