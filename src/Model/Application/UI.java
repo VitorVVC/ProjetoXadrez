@@ -5,7 +5,7 @@ import Model.Chess.ChessPiece;
 
 public class UI {
     public static void printBoard(ChessPiece[][] pieces) { // Considerando matriz quadrada
-        Integer pieceLenght = pieces.length;
+        int pieceLenght = pieces.length;
         for (int i = 0; i < pieceLenght; i++) {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieceLenght; j++) {
