@@ -5,13 +5,14 @@ import Model.Chess.ChessPiece;
 import Model.Chess.Color;
 
 public class Rook extends ChessPiece {
-    // Classe torre
+    // Classe Rook ( Torre ). Que herda os métodos de ChessPiece
     public Rook(Board board, Color color) {
         super(board, color);
     }
 
+    // Método toString, para retornar apenas qual a peça
     @Override
     public String toString() {
-        return "R"; // Retorna apenas o "R" para identificarmos que é um rook ( torre )
+        return "R";
     }
 }

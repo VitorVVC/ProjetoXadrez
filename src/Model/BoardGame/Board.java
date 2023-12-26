@@ -1,7 +1,7 @@
 package Model.BoardGame;
 
 public class Board {
-
+    // Classe BOARD que recebe linha + coluna e dois vetores de peças ( Peças "A", Peças "B" )
     private Integer rows;
     private Integer columns;
     private Piece[][] pieces;
