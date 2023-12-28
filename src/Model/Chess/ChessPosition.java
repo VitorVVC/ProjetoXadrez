@@ -16,6 +16,10 @@ public class ChessPosition {
 
     protected Position toPosition() {
         return new Position(8 - row, column - 'a');
+        // Realiza o calculo de conversão para uma nova posicão, "recebendo" por exemplo: C2
+        // Recebe o C2 e passa o C - 'A' que possui um valor definido, exemplo "0"
+        // Recebe o 2 e passa por uma subtração sendo --> 8 - 2.
+
     }
 
     protected static ChessPosition fromPosition(Position position) {

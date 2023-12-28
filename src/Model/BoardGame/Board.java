@@ -1,5 +1,8 @@
 package Model.BoardGame;
 
+import Model.Chess.ChessPiece;
+import Model.Chess.ChessPosition;
+
 public class Board {
     // Classe BOARD que recebe linha + coluna e dois vetores de peças ( Peças "A", Peças "B" )
     private Integer rows;
@@ -39,8 +42,23 @@ public class Board {
         pieces[position.getRows()][position.getColumns()] = piece;
         piece.position = position;
     }
-    // Método auxiliar para o método "positionExistis)
 
+    // Método para remoção de peças do no tabuleiro
+    public Piece removePiece(Position position) {
+        if (!positionExistis(position)) {
+            throw new BoardException("Position not on the board"); // Confere se a posição existe no tabuleiro
+        }
+        if (piece(position) == null) { // Caso não haja nenhuma peça nesta posição ele retornará nulo
+            return null;
+        } else { // Caso contrario criamos uma peca auxiliar que receberá a posição que desejamos remover, declarará a mesma como null, passará que nosso vetor de peças na posição fornecida seja também null e por fim , retorna a "peça" auxiliar.
+            Piece aux = piece(position);
+            aux.position = null;
+            pieces[position.getRows()][position.getColumns()] = null;
+            return aux;
+        }
+    }
+
+    // Método auxiliar para o método "positionExistis)
     private boolean positionExistis(Integer row, Integer column) {
         return row >= 0 && row < rows && column >= 0 && column < columns;
     }
@@ -57,6 +75,7 @@ public class Board {
         }
         return piece(position) != null;
     }
+
 
     // Métodos Get e Set
     public Integer getRows() {

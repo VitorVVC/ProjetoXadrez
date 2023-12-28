@@ -1,7 +1,11 @@
 package Model.Application;
 
 import Model.Chess.ChessPiece;
+import Model.Chess.ChessPosition;
 import Model.Chess.Color;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class UI {
 
@@ -42,16 +46,26 @@ public class UI {
     private static void printPiece(ChessPiece piece) {
         if (piece == null) {
             System.out.print("-");
-        }
-        else {
+        } else {
             if (piece.getColor() == Color.WHITE) {
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);
-            }
-            else {
+            } else {
                 System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
             }
         }
         System.out.print(" ");
     }
 
+    // Método para ler uma posição do usuário
+    public static ChessPosition readChessPosition(Scanner sc) { // Método que recebemos como entrada um Scanner SC para lermos oque for digitado pelo usuario em forma de "coordenadas" de xadrez. ( Exemplo: C3 )
+        try {
+            String s = sc.nextLine();  // Salvamos oque foi escrito
+            char column = s.charAt(0); // Pegamos apenas a coluna "C"
+            int row = Integer.parseInt(s.substring(1)); // Pegamos apenas o inteiro "3" +  --> // Recortar a minha string na posicao 1 e converteremos o resultado para um "int".
+
+            return new ChessPosition(column, row); // Retornamos uma nova coordenada do board de xadrez
+        } catch (RuntimeException e) {
+            throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
+        }
+    }
 }

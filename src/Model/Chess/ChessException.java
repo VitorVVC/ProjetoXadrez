@@ -1,7 +1,9 @@
 package Model.Chess;
 
-public class ChessException extends RuntimeException {
-    // Classe de exceptions para o pacote "Chess"
+import Model.BoardGame.BoardException;
+
+public class ChessException extends BoardException {
+    // Classe de exceptions para o pacote "Chess". Herda do pacote de excessoes de tabuleiro
     public ChessException(String msg) {
         super(msg);
     }

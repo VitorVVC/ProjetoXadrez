@@ -1,6 +1,8 @@
 package Model.Chess;
 
 import Model.BoardGame.Board;
+import Model.BoardGame.Piece;
+import Model.BoardGame.Position;
 import Model.Chess.pieces.King;
 import Model.Chess.pieces.Rook;
 
@@ -34,6 +36,36 @@ public class ChessMatch {
     // Método para colocar peças nas coordenadas do xadrez
     private void placeNewPiece(Character column, Integer row, ChessPiece piece) {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
+
+    // Método para mover peças, por agora apenas "sobrescreve" as posicoes, no futuro capturaremos as pecas.
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPoint) {
+        // Recebe uma posicao de entrada e onde é o seu "alvo".
+        // Cria duas posicões padrões que serão as passadas no argumento, porém "convertidas" para toPosition();
+        Position source = sourcePosition.toPosition();
+        Position target = targetPoint.toPosition();
+        // Valida a posição de entrada
+        validateSourcePosition(source);
+        // Realiza o possivel movimento de captura com ambas as coordenadas
+        Piece capturedPiece = makeMove(source, target);
+        // Retorna uma possivel peça capturada
+        return (ChessPiece) capturedPiece;
+    }
+
+    // Método auxiliar performChessMove. Valida uma posicao
+    private void validateSourcePosition(Position position) {
+        if (!board.thereIsAPiece(position)) { // Apenas recebe uma posicão de entrada e a valida de forma mais adequada para o caso
+            throw new ChessException("There is no piece on source position");
+        }
+    }
+
+    // Método auxiliar para performChessMove. Realiza um movimento perante uma posicao inicial e final
+    private Piece makeMove(Position source, Position target) {
+        Piece p = board.removePiece(source); // Removendo a peca na posicao de origem
+        Piece capturedPiece = board.removePiece(target); // Removendo uma possivel peca da posicao de destino
+
+        board.placePiece(p, target); // Colocamos a peça de origem na posicao de destino
+        return capturedPiece; // Retornamos apenas a peca capturada
     }
 
 
