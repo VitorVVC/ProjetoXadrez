@@ -57,6 +57,9 @@ public class ChessMatch {
         if (!board.thereIsAPiece(position)) { // Apenas recebe uma posicão de entrada e a valida de forma mais adequada para o caso
             throw new ChessException("There is no piece on source position");
         }
+        if (!board.piece(position).isThereAnyPossibleMove()) { // Testando se a peça tem movimentos possiveis, caso não tenha lança um erro
+            throw new ChessException("There is no possible moves for the chosen piece");
+        }
     }
 
     // Método auxiliar para performChessMove. Realiza um movimento perante uma posicao inicial e final

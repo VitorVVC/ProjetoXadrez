@@ -3,7 +3,7 @@ package Model.Chess;
 import Model.BoardGame.Board;
 import Model.BoardGame.Piece;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
     // Class de peça de xadrez, que herda de Piece e possue uma cor de identificação ( Branco OU Preto )
     private Color color;
 
