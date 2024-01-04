@@ -21,7 +21,14 @@ public class Main {
                 System.out.println();
                 System.out.print("Source: "); // Pedimos uma "coordenada" de qual a peça
                 ChessPosition source = UI.readChessPosition(sc); // Recebemos e armazenamos a mesma na função de ler estas coordenadas dadas em "formato xadrez"
-                System.out.print("Target: "); // Pedimos uma "coordenada" de destino
+
+                // Adicionando print de movimentos possiveis
+
+                boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getPieces(), possibleMoves);
+
+                System.out.print("\nTarget: "); // Pedimos uma "coordenada" de destino
                 ChessPosition target = UI.readChessPosition(sc); // Recebemos e armazenamos tal coordenada na função antes usada
 
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target); // Fazemos um movimento passando a coordenada de entrada e o destino com a função "performChessMove".

@@ -79,6 +79,12 @@ public class ChessMatch {
         return capturedPiece; // Retornamos apenas a peca capturada
     }
 
+    public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return board.piece(position).possibleMoves();
+    }
+
     // Método para colocar peças nas coordenadas de matriz
     private void initialSetup() {
         placeNewPiece('c', 1, new Rook(board, Color.WHITE));
