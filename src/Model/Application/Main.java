@@ -17,7 +17,7 @@ public class Main {
             try {
                 UI.clearScreen();
 
-                UI.printBoard(chessMatch.getPieces()); // Método de UI ( User Interface ). Que serve para printar o board criado fora do While
+                UI.printMatch(chessMatch); // Método de UI ( User Interface ). Que serve para printar o board criado fora do While
                 System.out.println();
                 System.out.print("Source: "); // Pedimos uma "coordenada" de qual a peça
                 ChessPosition source = UI.readChessPosition(sc); // Recebemos e armazenamos a mesma na função de ler estas coordenadas dadas em "formato xadrez"

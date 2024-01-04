@@ -12,10 +12,14 @@ public class ChessMatch {
 
     // Recebe um board como atributo e o declara justamente na criação do xadrez
     private Board board;
+    private int turn;
+    private Color currentPlayer;
 
     // Construtor
     public ChessMatch() {
         this.board = new Board(8, 8);
+        turn = 1;
+        currentPlayer = Color.WHITE;
         initialSetup();
     }
 
@@ -50,6 +54,7 @@ public class ChessMatch {
         // Realiza o possivel movimento de captura com ambas as coordenadas
         Piece capturedPiece = makeMove(source, target);
         // Retorna uma possivel peça capturada
+        nextTurn();
         return (ChessPiece) capturedPiece;
     }
 
@@ -57,6 +62,9 @@ public class ChessMatch {
     private void validateSourcePosition(Position position) {
         if (!board.thereIsAPiece(position)) {
             throw new ChessException("There is no piece on source position");
+        }
+        if (currentPlayer != ((ChessPiece) board.piece(position)).getColor()) {
+            throw new ChessException("The chosen piece is not yours");
         }
         if (!board.piece(position).isThereAnyPossibleMove()) {
             throw new ChessException("There is no possible moves for the chosen piece");
@@ -85,6 +93,11 @@ public class ChessMatch {
         return board.piece(position).possibleMoves();
     }
 
+    private void nextTurn() {
+        turn++;
+        currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
     // Método para colocar peças nas coordenadas de matriz
     private void initialSetup() {
         placeNewPiece('c', 1, new Rook(board, Color.WHITE));
@@ -102,5 +115,11 @@ public class ChessMatch {
         placeNewPiece('d', 8, new King(board, Color.BLACK));
     }
 
+    public int getTurn() {
+        return turn;
+    }
 
+    public Color getCurrentPlayer() {
+        return currentPlayer;
+    }
 }

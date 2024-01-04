@@ -1,5 +1,6 @@
 package Model.Application;
 
+import Model.Chess.ChessMatch;
 import Model.Chess.ChessPiece;
 import Model.Chess.ChessPosition;
 import Model.Chess.Color;
@@ -46,7 +47,7 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.print("  a b c d e f g h");
+        System.out.println("  a b c d e f g h");
     }
 
     // Método auxiliar para imprimir uma peça
@@ -88,6 +89,14 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.print("  a b c d e f g h");
+        System.out.println("  a b c d e f g h");
     }
+
+    public static void printMatch(ChessMatch chessMatch) {
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn : " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+    }
+
 }
