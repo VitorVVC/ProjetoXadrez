@@ -13,10 +13,6 @@ public class Position {
 
     // Método para "setar" os valores de linha e columa
     public void setValues(Integer rows, Integer columns) {
-        /*if (rows < 0 || columns < 0) {
-            throw new DomainException();
-        }
-         */
         this.rows = rows;
         this.columns = columns;
     }

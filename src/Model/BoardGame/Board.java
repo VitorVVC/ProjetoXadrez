@@ -64,7 +64,7 @@ public class Board {
     }
     // Método para retornar true or false referente a uma posicão fornecida, conferindo se a posicão de fato existe
 
-    private boolean positionExistis(Position position) {
+    public boolean positionExistis(Position position) { // Mudando para public para podermos utilizar em ROOK
         return positionExistis(position.getRows(), position.getColumns());
     }
 

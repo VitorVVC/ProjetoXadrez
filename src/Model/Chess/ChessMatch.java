@@ -46,6 +46,7 @@ public class ChessMatch {
         Position target = targetPoint.toPosition();
         // Valida a posição de entrada
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         // Realiza o possivel movimento de captura com ambas as coordenadas
         Piece capturedPiece = makeMove(source, target);
         // Retorna uma possivel peça capturada
@@ -62,6 +63,13 @@ public class ChessMatch {
         }
     }
 
+    // Método para validar a posição de destino
+    private void validateTargetPosition(Position source, Position target) {
+        if (!board.piece(source).possibleMove(target)) { // Pegamos a peça que há no source e verificamos se o movimento dela é possivel até o target
+            throw new ChessException("The chosen piece can't move to target position");
+        }
+    }
+
     // Método auxiliar para performChessMove. Realiza um movimento perante uma posicao inicial e final
     private Piece makeMove(Position source, Position target) {
         Piece p = board.removePiece(source); // Removendo a peca na posicao de origem
@@ -70,7 +78,6 @@ public class ChessMatch {
         board.placePiece(p, target); // Colocamos a peça de origem na posicao de destino
         return capturedPiece; // Retornamos apenas a peca capturada
     }
-
 
     // Método para colocar peças nas coordenadas de matriz
     private void initialSetup() {

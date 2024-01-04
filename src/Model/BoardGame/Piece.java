@@ -28,7 +28,7 @@ public abstract class Piece {
                     return true;
                 }
             }
-        }// Não existe movimento possivel
+        } // Não existe movimento possivel
         return false;
     }
 
