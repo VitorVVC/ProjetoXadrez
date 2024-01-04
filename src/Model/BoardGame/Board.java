@@ -20,7 +20,7 @@ public class Board {
 
     // Método para retornar uma peça dada a linha e coluna fornecida ( SOBRECARGA [1] )
     public Piece piece(Integer rows, Integer columns) {
-        if (!positionExistis(rows, columns)) {
+        if (!positionExists(rows, columns)) {
             throw new BoardException("Position not on the board");
         }
         return pieces[rows][columns];
@@ -28,7 +28,7 @@ public class Board {
 
     // Método para retornar uma peça dada a posição fornecida ( SOBRECARGA [2] )
     public Piece piece(Position position) {
-        if (!positionExistis(position)) {
+        if (!positionExists(position)) {
             throw new BoardException("Position not on the board");
         }
         return pieces[position.getRows()][position.getColumns()];
@@ -45,7 +45,7 @@ public class Board {
 
     // Método para remoção de peças do no tabuleiro
     public Piece removePiece(Position position) {
-        if (!positionExistis(position)) {
+        if (!positionExists(position)) {
             throw new BoardException("Position not on the board"); // Confere se a posição existe no tabuleiro
         }
         if (piece(position) == null) { // Caso não haja nenhuma peça nesta posição ele retornará nulo
@@ -59,18 +59,18 @@ public class Board {
     }
 
     // Método auxiliar para o método "positionExistis)
-    private boolean positionExistis(Integer row, Integer column) {
+    private boolean positionExists(Integer row, Integer column) {
         return row >= 0 && row < rows && column >= 0 && column < columns;
     }
     // Método para retornar true or false referente a uma posicão fornecida, conferindo se a posicão de fato existe
 
-    public boolean positionExistis(Position position) { // Mudando para public para podermos utilizar em ROOK
-        return positionExistis(position.getRows(), position.getColumns());
+    public boolean positionExists(Position position) { // Mudando para public para podermos utilizar em ROOK
+        return positionExists(position.getRows(), position.getColumns());
     }
 
     // Método para retornar true or false referente a posição ser ou não uma peça
     public boolean thereIsAPiece(Position position) {
-        if (!positionExistis(position)) {
+        if (!positionExists(position)) {
             throw new BoardException("Position not on the board");
         }
         return piece(position) != null;

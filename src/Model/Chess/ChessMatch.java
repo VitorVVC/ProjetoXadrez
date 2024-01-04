@@ -55,17 +55,17 @@ public class ChessMatch {
 
     // Método auxiliar performChessMove. Valida uma posicao
     private void validateSourcePosition(Position position) {
-        if (!board.thereIsAPiece(position)) { // Apenas recebe uma posicão de entrada e a valida de forma mais adequada para o caso
+        if (!board.thereIsAPiece(position)) {
             throw new ChessException("There is no piece on source position");
         }
-        if (!board.piece(position).isThereAnyPossibleMove()) { // Testando se a peça tem movimentos possiveis, caso não tenha lança um erro
+        if (!board.piece(position).isThereAnyPossibleMove()) {
             throw new ChessException("There is no possible moves for the chosen piece");
         }
     }
 
     // Método para validar a posição de destino
     private void validateTargetPosition(Position source, Position target) {
-        if (!board.piece(source).possibleMove(target)) { // Pegamos a peça que há no source e verificamos se o movimento dela é possivel até o target
+        if (!board.piece(source).possibleMove(target)) {
             throw new ChessException("The chosen piece can't move to target position");
         }
     }

@@ -12,9 +12,9 @@ public class Position {
     }
 
     // Método para "setar" os valores de linha e columa
-    public void setValues(Integer rows, Integer columns) {
-        this.rows = rows;
-        this.columns = columns;
+    public void setValues(int row, int column) {
+        this.rows = row;
+        this.columns = column;
     }
 
     // Métodos Get E Set \\

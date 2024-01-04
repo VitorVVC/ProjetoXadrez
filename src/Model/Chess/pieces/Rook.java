@@ -19,52 +19,51 @@ public class Rook extends ChessPiece {
 
     // Método para mover a peça TORRE, que deve seguir tais regras:
     // Pode se mover apenas na horizontal / vertical. Até ir de encontro com uma peça aliada ou do inimigo.
-    @Override
     public boolean[][] possibleMoves() {
-        boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getRows()];
-
+        boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 
         Position p = new Position(0, 0);
 
-        // Acima
-        p.setValues(position.getRows() - 1, position.getColumns()); // Assim nós obtemos a linha ACIMA de nossa peça
-        while (getBoard().positionExistis(p) && !getBoard().thereIsAPiece(p)) { // Enquanto a posição p existir e não houver peça nesta posição nos marcaremos ela como "true".
+        // above
+        p.setValues(position.getRows() - 1, position.getColumns());
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
             p.setRows(p.getRows() - 1);
         }
-        if (getBoard().positionExistis(p) && isThereOpponentPiece(p)) {
+        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
         }
 
-        // Esquerda
-        p.setValues(position.getRows(), position.getColumns() - 1); // Assim nós obtemos a coluna ESQUERDA de nossa peça
-        while (getBoard().positionExistis(p) && !getBoard().thereIsAPiece(p)) { // Enquanto a posição p existir e não houver peça nesta posição nos marcaremos ela como "true".
+        // left
+        p.setValues(position.getRows(), position.getColumns() - 1);
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
             p.setColumns(p.getColumns() - 1);
         }
-        if (getBoard().positionExistis(p) && isThereOpponentPiece(p)) {
+        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
         }
 
-        // Direita
-        p.setValues(position.getRows(), position.getColumns() + 1); // Assim nós obtemos a coluna DIREITA de nossa peça
-        while (getBoard().positionExistis(p) && !getBoard().thereIsAPiece(p)) { // Enquanto a posição p existir e não houver peça nesta posição nos marcaremos ela como "true".
+        // right
+        p.setValues(position.getRows(), position.getColumns() + 1);
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
             p.setColumns(p.getColumns() + 1);
         }
-        if (getBoard().positionExistis(p) && isThereOpponentPiece(p)) {
+        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
         }
 
-        // Baixo
-        p.setValues(position.getRows() + 1, position.getColumns()); // Assim nós obtemos a linha ABAIXO de nossa peça
-        while (getBoard().positionExistis(p) && !getBoard().thereIsAPiece(p)) { // Enquanto a posição p existir e não houver peça nesta posição nos marcaremos ela como "true".
+        // below
+        p.setValues(position.getRows() + 1, position.getColumns());
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
             p.setRows(p.getRows() + 1);
         }
-        if (getBoard().positionExistis(p) && isThereOpponentPiece(p)) {
+        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
             mat[p.getRows()][p.getColumns()] = true;
         }
+
         return mat;
     }
 }
