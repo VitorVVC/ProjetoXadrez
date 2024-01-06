@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class UI {
 
     // https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
-
+    // Cores que podemos usar na exibição do proagama
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -31,13 +31,12 @@ public class UI {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-    // Código para limpar as telas
+    // Código para limpar a tela para assim ficar em um "loop" de clears antes de printar o board
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
-
+    // Código para exibir o board ( 1 / 2 )
     public static void printBoard(ChessPiece[][] pieces) { // Considerando matriz quadrada
         int pieceLenght = pieces.length;
         for (int i = 0; i < pieceLenght; i++) {
@@ -49,6 +48,19 @@ public class UI {
         }
         System.out.println("  a b c d e f g h");
     }
+    // Código para exibir o board ( 2 / 2 ) ( Que neste caso recebe um movimento possivel, para imprimi-lo colorido )
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) { // Considerando matriz quadrada
+        int pieceLenght = pieces.length;
+        for (int i = 0; i < pieceLenght; i++) {
+            System.out.print((8 - i) + " ");
+            for (int j = 0; j < pieceLenght; j++) {
+                printPiece(pieces[i][j], possibleMoves[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("  a b c d e f g h");
+    }
+
 
     // Método auxiliar para imprimir uma peça
     private static void printPiece(ChessPiece piece, boolean background) {
@@ -78,18 +90,6 @@ public class UI {
         } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
         }
-    }
-
-    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) { // Considerando matriz quadrada
-        int pieceLenght = pieces.length;
-        for (int i = 0; i < pieceLenght; i++) {
-            System.out.print((8 - i) + " ");
-            for (int j = 0; j < pieceLenght; j++) {
-                printPiece(pieces[i][j], possibleMoves[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println("  a b c d e f g h");
     }
 
     public static void printMatch(ChessMatch chessMatch) {

@@ -76,7 +76,6 @@ public class Board {
         return piece(position) != null;
     }
 
-
     // Métodos Get e Set
     public Integer getRows() {
         return rows;
