@@ -6,6 +6,9 @@ import Model.BoardGame.Position;
 import Model.Chess.pieces.King;
 import Model.Chess.pieces.Rook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChessMatch {
     // Coração do projeto, classe onde nosso jogo de xadrez rodará
 
@@ -14,6 +17,9 @@ public class ChessMatch {
     private Board board;
     private int turn;
     private Color currentPlayer;
+
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+    private List<Piece> capturedPieces =  new ArrayList<>();
 
     // Construtor
     public ChessMatch() {
@@ -40,6 +46,7 @@ public class ChessMatch {
     // Método para colocar peças nas coordenadas do xadrez
     private void placeNewPiece(Character column, Integer row, ChessPiece piece) {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece);
     }
 
     // Método para mover peças, por agora apenas "sobrescreve" as posicoes, no futuro capturaremos as pecas.
@@ -82,8 +89,13 @@ public class ChessMatch {
     private Piece makeMove(Position source, Position target) {
         Piece p = board.removePiece(source); // Removendo a peca na posicao de origem
         Piece capturedPiece = board.removePiece(target); // Removendo uma possivel peca da posicao de destino
-
         board.placePiece(p, target); // Colocamos a peça de origem na posicao de destino
+
+        if(capturedPiece != null){
+            piecesOnTheBoard.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
+
         return capturedPiece; // Retornamos apenas a peca capturada
     }
 
