@@ -8,6 +8,7 @@ import Model.Chess.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChessMatch {
     // Coração do projeto, classe onde nosso jogo de xadrez rodará
@@ -17,9 +18,10 @@ public class ChessMatch {
     private Board board;
     private int turn;
     private Color currentPlayer;
+    private boolean check;
 
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
-    private List<Piece> capturedPieces =  new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
 
     // Construtor
     public ChessMatch() {
@@ -61,6 +63,15 @@ public class ChessMatch {
         // Realiza o possivel movimento de captura com ambas as coordenadas
         Piece capturedPiece = makeMove(source, target);
         // Retorna uma possivel peça capturada
+
+        if (testCheck(currentPlayer)) {
+            // Jogador se colocou em cheque
+            undoMove(source, target, capturedPiece);
+            throw new ChessException("You can't put yourself in check");
+        }
+
+        check = (testCheck(opponent(currentPlayer))) ? true : false;
+
         nextTurn();
         return (ChessPiece) capturedPiece;
     }
@@ -91,12 +102,24 @@ public class ChessMatch {
         Piece capturedPiece = board.removePiece(target); // Removendo uma possivel peca da posicao de destino
         board.placePiece(p, target); // Colocamos a peça de origem na posicao de destino
 
-        if(capturedPiece != null){
+        if (capturedPiece != null) {
             piecesOnTheBoard.remove(capturedPiece);
             capturedPieces.add(capturedPiece);
         }
 
         return capturedPiece; // Retornamos apenas a peca capturada
+    }
+
+    // Método para desfazer o movimento, para não colocar-se em cheque ( Fazer os movimentos contrários do makeMove )
+    private void undoMove(Position source, Position target, Piece capturedPiece) {
+        Piece p = board.removePiece(target);
+        board.placePiece(p, source);
+
+        if (capturedPiece != null) {
+            board.placePiece(capturedPiece, target);
+            capturedPieces.remove(capturedPiece);
+            piecesOnTheBoard.add(capturedPiece);
+        }
     }
 
     public boolean[][] possibleMoves(ChessPosition sourcePosition) {
@@ -108,6 +131,39 @@ public class ChessMatch {
     private void nextTurn() {
         turn++;
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
+    // Identificar quem é o oponente
+    private Color opponent(Color color) {
+        return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
+    // Método para ler a lista de pecas e filtrar por cor para retornar o rei
+    private ChessPiece king(Color color) {
+        List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece) x).getColor() == color).collect(Collectors.toList());
+
+        for (Piece p : list) {
+            if (p instanceof King) {
+                return (ChessPiece) p;
+            }
+        }
+        throw new IllegalStateException("There is no " + color + " king on the board");
+    }
+
+    // Método para verificar se o REI de determinada cor não está em check
+    private boolean testCheck(Color color) {
+        // Pegamos a posição em formato de matriz do nosso rei de X cor
+        Position kingPosition = king(color).getChessPosition().toPosition();
+        // Criamos uma lista de pecas do oponente, filtrando pela cor com o método opponent
+        List<Piece> opponentPieces = piecesOnTheBoard.stream().filter(x -> ((ChessPiece) x).getColor() == opponent(color)).collect(Collectors.toList());
+        for (Piece p : opponentPieces) {
+            boolean[][] mat = p.possibleMoves();
+            if (mat[kingPosition.getRows()][kingPosition.getColumns()]) {
+                // Rei em cheque
+                return true;
+            }
+        }
+        return false;
     }
 
     // Método para colocar peças nas coordenadas de matriz
@@ -133,5 +189,9 @@ public class ChessMatch {
 
     public Color getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public boolean getCheck() {
+        return check;
     }
 }

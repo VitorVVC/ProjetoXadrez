@@ -21,7 +21,11 @@ public abstract class ChessPiece extends Piece {
 
     // Método para identificar a peça que "irá" de encontro com o parametro e identificará se é ou não inimigo
     protected boolean isThereOpponentPiece(Position position) {
-        ChessPiece p = (ChessPiece)getBoard().piece(position);
+        ChessPiece p = (ChessPiece) getBoard().piece(position);
         return p != null && p.getColor() != color;
+    }
+
+    public ChessPosition getChessPosition() {
+        return ChessPosition.fromPosition(position);
     }
 }
