@@ -121,13 +121,13 @@ public class ChessMatch {
             piecesOnTheBoard.add(capturedPiece);
         }
     }
-
+    // Método para checar os possiveis movimentos de uma peça em determinada posicao de origem
     public boolean[][] possibleMoves(ChessPosition sourcePosition) {
         Position position = sourcePosition.toPosition();
         validateSourcePosition(position);
         return board.piece(position).possibleMoves();
     }
-
+    // Método para passar o turno. Referente ao player e sua cor
     private void nextTurn() {
         turn++;
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;

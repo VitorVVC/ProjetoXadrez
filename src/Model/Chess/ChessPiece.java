@@ -13,19 +13,19 @@ public abstract class ChessPiece extends Piece {
         super(board);
         this.color = color;
     }
+    // Método para identificar a peça que "irá" de encontro com o parametro e identificará se é ou não inimigo
+    protected boolean isThereOpponentPiece(Position position) {
+        ChessPiece p = (ChessPiece) getBoard().piece(position);
+        return p != null && p.getColor() != color;
+    }
+    // Métodos GET
+    public ChessPosition getChessPosition() {
+        return ChessPosition.fromPosition(position);
+    }
 
     // Método GET
     public Color getColor() {
         return color;
     }
 
-    // Método para identificar a peça que "irá" de encontro com o parametro e identificará se é ou não inimigo
-    protected boolean isThereOpponentPiece(Position position) {
-        ChessPiece p = (ChessPiece) getBoard().piece(position);
-        return p != null && p.getColor() != color;
-    }
-
-    public ChessPosition getChessPosition() {
-        return ChessPosition.fromPosition(position);
-    }
 }
