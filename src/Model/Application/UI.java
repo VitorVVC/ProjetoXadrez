@@ -96,6 +96,7 @@ public class UI {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
         }
     }
+
     // Método para printar a partida, recebendo como parametro uma partida de xadrez e lista de pecas capturadas
     public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
         printBoard(chessMatch.getPieces());
@@ -103,11 +104,18 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turn : " + chessMatch.getTurn());
-        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-        if (chessMatch.getCheck()) {
-            System.out.println("CHECK!");
+        if (!chessMatch.getCheckMate()) {
+            System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+            if (chessMatch.getCheck()) {
+                System.out.println("CHECK!");
+            }
+        } else {
+            System.out.println(ANSI_RED + "CHECKMATE!!");
+            System.out.println(ANSI_BLUE + "Winner " + chessMatch.getCurrentPlayer() + ANSI_RESET);
         }
+
     }
+
     // Método para printar pecas capturadas
     private static void printCapturedPieces(List<ChessPiece> captured) {
         // Operação básica com LAMBDA para filtrar por pecas capturadas brancas e pretas

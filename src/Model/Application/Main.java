@@ -16,7 +16,7 @@ public class Main {
         ChessMatch chessMatch = new ChessMatch();
         List<ChessPiece> captured = new ArrayList<>();
 
-        while (true) { // While apenas para testar a funcão de movimento das peç9as
+        while (!chessMatch.getCheckMate()) { // While enquanto fora de checkMate
 
             try {
                 UI.clearScreen();
@@ -47,5 +47,7 @@ public class Main {
                 sc.nextLine();
             }
         }
+        UI.clearScreen();
+        UI.printMatch(chessMatch,captured);
     }
 }
