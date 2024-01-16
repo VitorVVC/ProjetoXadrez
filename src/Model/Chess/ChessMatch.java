@@ -3,10 +3,7 @@ package Model.Chess;
 import Model.BoardGame.Board;
 import Model.BoardGame.Piece;
 import Model.BoardGame.Position;
-import Model.Chess.pieces.Bishop;
-import Model.Chess.pieces.King;
-import Model.Chess.pieces.Pawn;
-import Model.Chess.pieces.Rook;
+import Model.Chess.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +103,7 @@ public class ChessMatch {
 
     // Método auxiliar para performChessMove. Realiza um movimento perante uma posicao inicial e final
     private Piece makeMove(Position source, Position target) {
-        ChessPiece p = (ChessPiece)board.removePiece(source); // Removendo a peca na posicao de origem
+        ChessPiece p = (ChessPiece) board.removePiece(source); // Removendo a peca na posicao de origem
         p.incrieaseMoveCount();
         Piece capturedPiece = board.removePiece(target); // Removendo uma possivel peca da posicao de destino
         board.placePiece(p, target); // Colocamos a peça de origem na posicao de destino
@@ -121,7 +118,7 @@ public class ChessMatch {
 
     // Método para desfazer o movimento, para não colocar-se em cheque ( Fazer os movimentos contrários do makeMove )
     private void undoMove(Position source, Position target, Piece capturedPiece) {
-        ChessPiece p = (ChessPiece)board.removePiece(target);
+        ChessPiece p = (ChessPiece) board.removePiece(target);
         p.decreaseMoveCount();
         board.placePiece(p, source);
 
@@ -206,9 +203,11 @@ public class ChessMatch {
     // Método para colocar peças nas coordenadas de matriz
     private void initialSetup() {
         placeNewPiece('a', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('b', 1, new Knight(board, Color.WHITE));
         placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
         placeNewPiece('e', 1, new King(board, Color.WHITE));
         placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
+        placeNewPiece('g', 1, new Knight(board, Color.WHITE));
         placeNewPiece('h', 1, new Rook(board, Color.WHITE));
         placeNewPiece('a', 2, new Pawn(board, Color.WHITE));
         placeNewPiece('b', 2, new Pawn(board, Color.WHITE));
@@ -220,9 +219,11 @@ public class ChessMatch {
         placeNewPiece('h', 2, new Pawn(board, Color.WHITE));
 
         placeNewPiece('a', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('b', 8, new Knight(board, Color.BLACK));
         placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
         placeNewPiece('e', 8, new King(board, Color.BLACK));
         placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
+        placeNewPiece('g', 8, new Knight(board, Color.BLACK));
         placeNewPiece('h', 8, new Rook(board, Color.BLACK));
         placeNewPiece('a', 7, new Pawn(board, Color.BLACK));
         placeNewPiece('b', 7, new Pawn(board, Color.BLACK));
@@ -250,4 +251,3 @@ public class ChessMatch {
         return checkMate;
     }
 }
-    
