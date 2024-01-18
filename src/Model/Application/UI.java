@@ -44,26 +44,26 @@ public class UI {
     public static void printBoard(ChessPiece[][] pieces) { // Considerando matriz quadrada
         int pieceLenght = pieces.length;
         for (int i = 0; i < pieceLenght; i++) {
-            System.out.print((8 - i) + " ");
+            System.out.print(ANSI_GREEN + (8 - i) + " " + ANSI_RESET);
             for (int j = 0; j < pieceLenght; j++) {
                 printPiece(pieces[i][j], false);
             }
             System.out.println();
         }
-        System.out.println("  a b c d e f g h");
+        System.out.println(ANSI_GREEN + "  a b c d e f g h" + ANSI_RESET);
     }
 
     // Código para exibir o board ( 2 / 2 ) ( Que neste caso recebe um movimento possivel, para imprimi-lo colorido )
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) { // Considerando matriz quadrada
         int pieceLenght = pieces.length;
         for (int i = 0; i < pieceLenght; i++) {
-            System.out.print((8 - i) + " ");
+            System.out.print(ANSI_GREEN + (8 - i) + " " + ANSI_RESET);
             for (int j = 0; j < pieceLenght; j++) {
                 printPiece(pieces[i][j], possibleMoves[i][j]);
             }
             System.out.println();
         }
-        System.out.println("  a b c d e f g h");
+        System.out.println(ANSI_GREEN + "  a b c d e f g h" + ANSI_RESET);
     }
 
 
@@ -103,9 +103,9 @@ public class UI {
         System.out.println();
         printCapturedPieces(captured);
         System.out.println();
-        System.out.println("Turn : " + chessMatch.getTurn());
+        System.out.println("Turn : " + ANSI_PURPLE + chessMatch.getTurn() + ANSI_RESET);
         if (!chessMatch.getCheckMate()) {
-            System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+            System.out.println("Waiting player: " + ANSI_PURPLE + chessMatch.getCurrentPlayer() + ANSI_RESET);
             if (chessMatch.getCheck()) {
                 System.out.println("CHECK!");
             }
